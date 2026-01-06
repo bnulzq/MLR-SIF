@@ -1,11 +1,11 @@
 # MLR USER'S MANUAL (0.0.0) 
 -----
 
-===
+---
 Reference: MLR_User_Manual
 Release date: 2026
 Author: Zhenqi Luo
-===
+---
 
 # Content
 ## I. Interactive Effects of Structure, Parameter, and Subgrid Heterogeneity on Modeling Solar-induced Chlorophyll Fluorescence (SIF)
