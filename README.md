@@ -7,11 +7,6 @@ Release date: 2026
 Author: Zhenqi Luo  
 ---
 
-| A | B | C |
-| - | - | - |
-| 1 | 2 | 3 |
-| 4 | 5 | 6 |
-
 # Content
 ## I. Interactive Effects of Structure, Parameter, and Subgrid Heterogeneity on Modeling Solar-induced Chlorophyll Fluorescence (SIF)
 ## II. MLR model
