@@ -8,11 +8,12 @@ Author: Zhenqi Luo
 ---
 
 ## Content
-**I. Interactive Effects of Structure, Parameter, and Subgrid Heterogeneity on Modeling Solar-induced Chlorophyll Fluorescence (SIF)**  
-**II. MLR model**  
-**III. MLR functionalities and scales**  
-  **III.1 Leaf-level MLR model**  
-  **III.2 Canopy-level MLR model**  
+
+1. **I. Interactive Effects of Structure, Parameter, and Subgrid Heterogeneity on Modeling Solar-induced Chlorophyll Fluorescence (SIF)**  
+2. **II. MLR model**  
+3. **III. MLR functionalities and scales**
+  3.1 **III.1 Leaf-level MLR model**  
+  3.2 **III.2 Canopy-level MLR model**  
 [**Annex 1: Abbreviations**](#Annex-1-Abbreviations)  
 
 Mechanistic light reaction (MLR) describes the mechanistic relationship among three sets of unknowns: solar-induced chlorophyll fluorescence (SIF), the actual electron transport rate (Ja) or photochemical quantum yield (ΦP), and non-photochemical quenching (NPQ) (or the fraction of open photosystem II (PSII) reaction centers, qL).
