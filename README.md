@@ -11,7 +11,7 @@ Author: Zhenqi Luo (zl725@cornell.edu)
 
 [**I. Interactive Effects of Structure, Parameter, and Subgrid Heterogeneity on Modeling Solar-induced Chlorophyll Fluorescence (SIF)**](#i-interactive-effects-of-structure-parameter-and-subgrid-heterogeneity-on-modeling-solar-induced-chlorophyll-fluorescence-sif)      
 [**II. The MLR Model Framework**](#II-The-MLR-Model-Framework)  
-**III. MLR Functionalities and Scales**    
+[**III. MLR Functionalities and Scales**](#III-MLR-Functionalities-and-Scales)    
 _**III.1 Leaf-level MLR model**_  
 _**III.2 Canopy-level MLR model**_  
 [**Annex 1: Abbreviations**](#Annex-1-Abbreviations)  
@@ -54,6 +54,31 @@ Subgrid heterogeneity refers to unresolved spatial variability within a model gr
 
 ## II. The MLR Model Framework
 
+Developed since 2019, the MLR model represents one of the most mechanistically grounded frameworks for linking SIF to GPP, with a central focus on the photosynthetic light reactions.
+
+At the leaf level, MLR explicitly couples light reactions, characterized by photosynthetically active radiation (PAR) and SIF emission, to carbon fixation through the regulation of photochemical efficiency. This coupling is mediated by qL, or equivalently, NPQ. Through this formulation, MLR establishes a mechanistic pathway that translates observed SIF into photosynthetic electron transport and, ultimately, carbon assimilation, rather than relying on empirical correlations.
+
+At the canopy level, MLR integrates leaf-scale physiological processes with an explicit treatment of canopy radiative transfer, enabling physically consistent scaling from leaves to the canopy. This integration preserves mechanistic interpretability while accounting for vertical gradients in light availability, photosynthetic capacity, and fluorescence emission. As a result, the canopy-level MLR provides a coherent framework for linking remotely sensed SIF to canopy-scale GPP.
+
+A key conceptual advantage of MLR is its forward inference strategy: measured SIF is used directly to estimate GPP without dependence on eddy-covariance (EC)–derived GPP products for calibration. By avoiding EC-based tuning, MLR breaks the common circularity in which satellite SIF is calibrated against EC GPP and then used to evaluate or constrain terrestrial biosphere models. This independence forms a critical foundation for the robustness and scalability of MLR across spatial scales, temporal resolutions, and ecosystem types.
+
+**_Scalability Across Scales_**
+
+The MLR framework has demonstrated strong scalability and transferability across multiple observational and modeling scales:
+
+- Leaf scale: MLR has been evaluated using pulse-amplitude-modulated (PAM) fluorescence measurements across 29 plant species representative of major global biomes, demonstrating its physiological generality.
+
+- Canopy scale: MLR has been shown to outperform classical approaches, including the Farquhar, von Caemmerer, and Berry (FvCB) photosynthesis model and Radiation Use Efficiency (RUE) models, in estimating GPP across EC sites at hourly to multi-day timescales.
+
+- Regional scale: MLR has been applied to regional crop systems to estimate crop productivity and yield.
+
+- Global scale: A global SIF-based GPP product has been developed following the MLR strategy, demonstrating its applicability to large-scale Earth system analyses.
+
+## III. MLR Functionalities and Scales
+
+### III.1 Leaf-level MLR model
+
+### III.2 Canopy-level MLR model
 
 
 ## Annex 1: Abbreviations
@@ -62,13 +87,18 @@ Subgrid heterogeneity refers to unresolved spatial variability within a model gr
 Cab: chlorophyll content a and b
 Jmax: maximum electron transport rate
 Vcmax: maximum carboxylation rate
+EC: eddy-covariance
+FvCB: Farquhar, von Caemmerer and Berry
 GPP: gross primary production
 LSM: land surface model
 Ja: actual electron transport rate
 MLR: mechanistic light reaction
 NPQ: non-photochemical quenching
+PAM: pulse-amplitude-modulated
+PAR: photosynthetically active radiation
 PFT: plant functional types
 PSII: photosystem II
 qL: the fraction of open PSII reaction centers
+RUE: Radiation Use Efficiency
 SIF: solar-induced chlorophyll fluorescence
 SCOPE: Soil Canopy Observation of Photosynthesis and Energy fluxes
