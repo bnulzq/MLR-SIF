@@ -83,22 +83,22 @@ The MLR framework has demonstrated strong scalability and transferability across
 
 ## Annex 1: Abbreviations
 
-ΦP: photochemical quantum yield
-Cab: chlorophyll content a and b
-Jmax: maximum electron transport rate
-Vcmax: maximum carboxylation rate
-EC: eddy-covariance
-FvCB: Farquhar, von Caemmerer and Berry
-GPP: gross primary production
-LSM: land surface model
-Ja: actual electron transport rate
-MLR: mechanistic light reaction
-NPQ: non-photochemical quenching
-PAM: pulse-amplitude-modulated
-PAR: photosynthetically active radiation
-PFT: plant functional types
-PSII: photosystem II
-qL: the fraction of open PSII reaction centers
-RUE: Radiation Use Efficiency
-SIF: solar-induced chlorophyll fluorescence
-SCOPE: Soil Canopy Observation of Photosynthesis and Energy fluxes
+ΦP: photochemical quantum yield  
+Cab: chlorophyll content a and b  
+Jmax: maximum electron transport rate  
+Vcmax: maximum carboxylation rate  
+EC: eddy-covariance  
+FvCB: Farquhar, von Caemmerer and Berry  
+GPP: gross primary production  
+LSM: land surface model  
+Ja: actual electron transport rate  
+MLR: mechanistic light reaction  
+NPQ: non-photochemical quenching  
+PAM: pulse-amplitude-modulated  
+PAR: photosynthetically active radiation  
+PFT: plant functional types  
+PSII: photosystem II  
+qL: the fraction of open PSII reaction centers  
+RUE: Radiation Use Efficiency  
+SIF: solar-induced chlorophyll fluorescence  
+SCOPE: Soil Canopy Observation of Photosynthesis and Energy fluxes  
