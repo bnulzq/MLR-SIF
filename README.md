@@ -62,7 +62,7 @@ At the canopy level, MLR integrates leaf-scale physiological processes with an e
 
 A key conceptual advantage of MLR is its forward inference strategy: measured SIF is used directly to estimate GPP without dependence on eddy-covariance (EC)–derived GPP products for calibration. By avoiding EC-based tuning, MLR breaks the common circularity in which satellite SIF is calibrated against EC GPP and then used to evaluate or constrain terrestrial biosphere models. This independence forms a critical foundation for the robustness and scalability of MLR across spatial scales, temporal resolutions, and ecosystem types.
 
-**_Scalability Across Scales_**
+### Scalability Across Scales
 
 The MLR framework has demonstrated strong scalability and transferability across multiple observational and modeling scales:
 
