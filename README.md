@@ -80,11 +80,30 @@ MLR describes the mechanistic relationship among three sets of unknowns: SIF, Ja
 
 ### III.1 Leaf-level MLR model
 
-![Fig1](Figs/SCOPE_SIF.png)
+![Fig1](Figs/SCOPE_SIF1.png)
 
-The procedure of modeling SIF emission (Fe), using two alternative strategies implemented in SCOPE: the qL-based and NPQ-based approaches. Both strategies utilize the FvCB biochemical model to compute Ja, which is then combined with independent NPQ- or qL-based formulations to derive Fe. The default SCOPE implementation computes Fe via the NPQ-based route, where the rate constant of NPQ (kN) is formulated as a function of the degree of light saturation (x). We explored the alternative qL-based route, in which qL is formulated as a function of incident PAR, capturing the first-order effects of light intensities on qL variation. Similar to the NPQ-based approach, this method relies on the FvCB to estimate Ja at the leaf level. We then compared simulated Fe from the qL-based and NPQ-based approaches. 
+The procedure of modeling SIF emission (F_e_), using two alternative strategies implemented in SCOPE: the qL-based and NPQ-based approaches. Both strategies utilize the FvCB biochemical model to compute Ja, which is then combined with independent NPQ- or qL-based formulations to derive Fe. The default SCOPE implementation computes Fe via the NPQ-based route, where the rate constant of NPQ (k_N_) is formulated as a function of the degree of light saturation (x). We explored the alternative qL-based route, in which qL is formulated as a function of incident PAR, capturing the first-order effects of light intensities on qL variation. Similar to the NPQ-based approach, this method relies on the FvCB to estimate Ja at the leaf level. We then compared simulated Fe from the qL-based and NPQ-based approaches. Specificly, qL can be effectively estimated using a parsimonious equation as a function of incident PAR: 
 
+$$
+q_L = a_{q_L} * e^{-b_{q_L}*PAR}
+$$
 
+where aqL and bqL are empirical parameters, which were determined by fitting leaf-level PAM measurements across diverse PFTs under varying environmental conditions. These parameters are relatively conservative across PFTs, lending support for greater scalability and broader applicability of the qL-based SIF formulation.
+Then, PSII Fe (F_e, PSII_) based on the qL strategy can be computed directly below:
+
+$$
+F_{e, PSII} = \frac{J_a*\Phi_{PSIIm}}{\Phi_{PSIIm}(1+k_{DF})q_L}
+$$
+
+Here k_DF_ is the ratio of k_D_ and k_F_. Finally, fluorescence yield (ΦF) of PSII (Φ_F, PSII_) based on the qL strategy can be obtained from:
+
+$$
+\Phi_{F, PSII} = \frac{F_e}{0.5*APAR}
+$$
+
+where the factor 0.5 reflects the fraction of the absorbed PAR (APAR) allocated to PSII.
+
+SCOPE stratifies the canopy into sunlit and shaded leaves. Therefore, all dynamic variables relevant to NPQ- and qL-based formulations above are calculated separately for sunlit and shaded leaves.
 
 ### III.2 Canopy-level MLR model
 
@@ -92,18 +111,25 @@ To be done...
 
 ## Annex 1: Abbreviations
 
+ΦF: fluorescence yield  
+Φ_F, PSII_: PSII ΦF  
 ΦP: photochemical quantum yield  
 Cab: chlorophyll content a and b  
-Fe: SIF emission  
+F_e_: SIF emission  
+F_e, PSII_: PSII Fe  
+Ja: actual electron transport rate  
 Jmax: maximum electron transport rate 
-kN: the rate constant of NPQ
+k_D_: The rate constant of internal conversion (unregulated heat dissipation)
+k_F_: The rate constant of SIF emission  
+k_DF_: The ratio of k_D_ to k_F_    
+k_N_: the rate constant of NPQ  
 Vcmax: maximum carboxylation rate  
 x: the degree of light saturation  
+APAR: absorbed PAR  
 EC: eddy-covariance  
 FvCB: Farquhar, von Caemmerer and Berry  
 GPP: gross primary production  
 LSM: land surface model  
-Ja: actual electron transport rate  
 MLR: mechanistic light reaction  
 NPQ: non-photochemical quenching  
 PAM: pulse-amplitude-modulated  
