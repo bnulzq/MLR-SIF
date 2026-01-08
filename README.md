@@ -105,7 +105,7 @@ $$
 F_{e, PSII} = \frac{J_a*\Phi_{PSIIm}}{\Phi_{PSIIm}(1+k_{DF})q_L}
 $$
 
-where k<sub>DF</sub> ​denotes the ratio of the constitutive heat dissipation rate constant (k<sub>D</sub>) to the fluorescence rate constant (k<sub>F</sub>), and Φ<sub>PSIIm</sub> represents the maximum photochemical quantum yield for a darkadapted leaf. The corresponding PSII fluorescence yield (Φ<sub>F,PSII</sub>) is then obtained as:
+where k<sub>DF</sub> ​denotes the ratio of the constitutive heat dissipation rate constant (k<sub>D</sub>) to the fluorescence rate constant (k<sub>F</sub>), and Φ<sub>PSIIm</sub> represents the maximum photochemical quantum yield for a dark-adapted leaf. The corresponding PSII fluorescence yield (Φ<sub>F,PSII</sub>) is then obtained as:
 
 $$
 \Phi_{F, PSII} = \frac{F_e}{0.5*APAR}
@@ -113,7 +113,7 @@ $$
 
 where APAR denotes absorbed photosynthetically active radiation, and the factor 0.5 accounts for the assumption that half of APAR is allocated to PSII.
 
-In SCOPE, the canopy is stratified into sunlit and shaded leaf fractions. Accordingly, all state variables and fluxes relevant to the NPQ- and q<sub>L</sub>-based formulations—including PAR, J<sub>a</sub>, q<sub>L</sub>, and F<sub>e</sub>—are computed separately for sunlit and shaded leaves prior to canopy integration.
+In SCOPE, the canopy is stratified into sunlit and shaded leaf fractions. Accordingly, all state variables and fluxes relevant to the NPQ- and q<sub>L</sub>-based formulations, including PAR, J<sub>a</sub>, q<sub>L</sub>, and F<sub>e</sub>, are computed separately for sunlit and shaded leaves prior to canopy integration.
 
 ### III.2 Canopy-level MLR model
 
