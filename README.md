@@ -82,18 +82,9 @@ MLR describes the mechanistic relationship among three sets of unknowns: SIF, Ja
 
 ![Fig1](Figs/SCOPE_SIF.png)
 
-Figure 1 outlines the procedure of modeling Fe, using two alternative strategies implemented in 
-221 SCOPE: the qL-based and NPQ-based approaches. Both strategies utilize the FvCB biochemical 
-222 model to compute Ja, which is then combined with independent NPQ- or qL-based formulations to 
-223 derive Fe. The default SCOPE implementation computes Fe via the NPQ-based route, where the 
-224 rate constant of NPQ (kN) is formulated as a function of the degree of light saturation (x; van der 
-225 Tol et al., 2014). In this study, we explored the alternative qL-based route, in which qL is formulated 
-226 as a function of incident PAR, capturing the first-order effects of light intensities on qL variation 
-227 (Han et al., 2022a). Similar to the NPQ-based approach, this method relies on the FvCB to estimate 
-228 Ja at the leaf level. We then compared simulated Fe from the qL-based and NPQ-based approaches. 
-229 Below, we briefly describe the SCOPE model framework (Sect. 2.2.1), the NPQ-based SIF 
-230 formulation (Sect. 2.2.2), the qL-based SIF formulation (Sect. 2.2.3), SIF upscaling from leaf to 
-231 canopy (Sect. 2.2.4), and our simulation experiments (Sect. 2.2.5).
+The procedure of modeling SIF emission (Fe), using two alternative strategies implemented in SCOPE: the qL-based and NPQ-based approaches. Both strategies utilize the FvCB biochemical model to compute Ja, which is then combined with independent NPQ- or qL-based formulations to derive Fe. The default SCOPE implementation computes Fe via the NPQ-based route, where the rate constant of NPQ (kN) is formulated as a function of the degree of light saturation (x). We explored the alternative qL-based route, in which qL is formulated as a function of incident PAR, capturing the first-order effects of light intensities on qL variation. Similar to the NPQ-based approach, this method relies on the FvCB to estimate Ja at the leaf level. We then compared simulated Fe from the qL-based and NPQ-based approaches. 
+
+
 
 ### III.2 Canopy-level MLR model
 
@@ -103,8 +94,11 @@ To be done...
 
 ΦP: photochemical quantum yield  
 Cab: chlorophyll content a and b  
-Jmax: maximum electron transport rate  
+Fe: SIF emission  
+Jmax: maximum electron transport rate 
+kN: the rate constant of NPQ
 Vcmax: maximum carboxylation rate  
+x: the degree of light saturation  
 EC: eddy-covariance  
 FvCB: Farquhar, von Caemmerer and Berry  
 GPP: gross primary production  
