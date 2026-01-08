@@ -82,7 +82,7 @@ MLR describes the mechanistic relationship among three sets of unknowns: SIF, Ja
 
 ![Fig1](Figs/SCOPE_SIF1.png)
 
-The procedure of modeling SIF emission (F_e_), using two alternative strategies implemented in SCOPE: the qL-based and NPQ-based approaches. Both strategies utilize the FvCB biochemical model to compute Ja, which is then combined with independent NPQ- or qL-based formulations to derive Fe. The default SCOPE implementation computes Fe via the NPQ-based route, where the rate constant of NPQ (k_N_) is formulated as a function of the degree of light saturation (x). We explored the alternative qL-based route, in which qL is formulated as a function of incident PAR, capturing the first-order effects of light intensities on qL variation. Similar to the NPQ-based approach, this method relies on the FvCB to estimate Ja at the leaf level. We then compared simulated Fe from the qL-based and NPQ-based approaches. Specificly, qL can be effectively estimated using a parsimonious equation as a function of incident PAR: 
+The procedure of modeling SIF emission (F<sub>e<sub>), using two alternative strategies implemented in SCOPE: the qL-based and NPQ-based approaches. Both strategies utilize the FvCB biochemical model to compute Ja, which is then combined with independent NPQ- or qL-based formulations to derive Fe. The default SCOPE implementation computes Fe via the NPQ-based route, where the rate constant of NPQ (k_N_) is formulated as a function of the degree of light saturation (x). We explored the alternative qL-based route, in which qL is formulated as a function of incident PAR, capturing the first-order effects of light intensities on qL variation. Similar to the NPQ-based approach, this method relies on the FvCB to estimate Ja at the leaf level. We then compared simulated Fe from the qL-based and NPQ-based approaches. Specificly, qL can be effectively estimated using a parsimonious equation as a function of incident PAR: 
 
 $$
 q_L = a_{q_L} * e^{-b_{q_L}*PAR}
@@ -119,9 +119,9 @@ F_e_: SIF emission
 F_e, PSII_: PSII Fe  
 Ja: actual electron transport rate  
 Jmax: maximum electron transport rate 
-k_D_: The rate constant of internal conversion (unregulated heat dissipation)
+k_D_: The rate constant of internal conversion (unregulated heat dissipation)  
 k_F_: The rate constant of SIF emission  
-k_DF_: The ratio of k_D_ to k_F_    
+k_DF_: The ratio of k_D_ to k_F_      
 k_N_: the rate constant of NPQ  
 Vcmax: maximum carboxylation rate  
 x: the degree of light saturation  
