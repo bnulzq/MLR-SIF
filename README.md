@@ -124,7 +124,7 @@ To be done...
 Φ<sub>F</sub>: fluorescence yield  
 Φ<sub>F, PSII</sub>: PSII ΦF  
 Φ<sub>P</sub>: photochemical quantum yield  
-Φ<sub>PSIIm</sub>: the maximum photochemical quantum yield for a darkadapted leaf
+Φ<sub>PSIIm</sub>: the maximum photochemical quantum yield for a dark-adapted leaf
 Cab: chlorophyll content a and b  
 F<sub>e</sub>: SIF emission  
 F<sub>e, PSII</sub>: PSII Fe  
@@ -132,7 +132,7 @@ J<sub>a</sub>: actual electron transport rate
 Jmax: maximum electron transport rate 
 k<sub>D</sub>: The rate constant of internal conversion (unregulated heat dissipation)  
 k<sub>F</sub>: The rate constant of SIF emission  
-k<sub>DF</sub>: The ratio of k_D_ to k_F_      
+k<sub>DF</sub>: the ratio of k<sub>D</sub> to k<sub>F</sub>      
 k<sub>N</sub>: the rate constant of NPQ  
 Vcmax: maximum carboxylation rate  
 x: the degree of light saturation  
