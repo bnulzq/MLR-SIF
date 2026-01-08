@@ -122,12 +122,12 @@ To be done...
 ## Annex 1: Abbreviations
 
 Φ<sub>F</sub>: fluorescence yield  
-Φ<sub>F, PSII</sub>: PSII ΦF  
+Φ<sub>F, PSII</sub>: PSII Φ<sub>F</sub>  
 Φ<sub>P</sub>: photochemical quantum yield  
 Φ<sub>PSIIm</sub>: the maximum photochemical quantum yield for a dark-adapted leaf
 Cab: chlorophyll content a and b  
 F<sub>e</sub>: SIF emission  
-F<sub>e, PSII</sub>: PSII Fe  
+F<sub>e, PSII</sub>: PSII F<sub>e</sub>  
 J<sub>a</sub>: actual electron transport rate  
 Jmax: maximum electron transport rate 
 k<sub>D</sub>: The rate constant of internal conversion (unregulated heat dissipation)  
