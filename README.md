@@ -21,8 +21,8 @@ _**III.2 Canopy-level MLR model**_
 The mechanistic light reaction (MLR) describes the mechanistic relationship among three core components of the photosynthetic light reactions: 
 
 - Solar-induced chlorophyll fluorescence (SIF)
-- Photochemical activity, representing by the actual electron transport rate (Ja) or photochemical quantum yield (ΦP)
-- Non-photochemical quenching (NPQ), or equivalently the fraction of open photosystem II (PSII) reaction centers (qL)
+- Photochemical activity, representing by the actual electron transport rate (J<sub>a</sub>) or photochemical quantum yield (Φ<sub>P</sub>)
+- Non-photochemical quenching (NPQ), or equivalently the fraction of open photosystem II (PSII) reaction centers (q<sub>L</sub>)
 
 MLR provides a physically and physiologically grounded representation of energy partitioning during photosynthesis, enabling a direct mechanistic linkage between remotely sensed SIF and carbon assimilation.
 
@@ -56,7 +56,7 @@ Subgrid heterogeneity refers to unresolved spatial variability within a model gr
 
 Developed since 2019, the MLR model represents one of the most mechanistically grounded frameworks for linking SIF to GPP, with a central focus on the photosynthetic light reactions.
 
-At the leaf level, MLR explicitly couples light reactions, characterized by photosynthetically active radiation (PAR) and SIF emission, to carbon fixation through the regulation of photochemical efficiency. This coupling is mediated by qL, or equivalently, NPQ. Through this formulation, MLR establishes a mechanistic pathway that translates observed SIF into photosynthetic electron transport and, ultimately, carbon assimilation, rather than relying on empirical correlations.
+At the leaf level, MLR explicitly couples light reactions, characterized by photosynthetically active radiation (PAR) and SIF emission, to carbon fixation through the regulation of photochemical efficiency. This coupling is mediated by q<sub>L</sub>, or equivalently, NPQ. Through this formulation, MLR establishes a mechanistic pathway that translates observed SIF into photosynthetic electron transport and, ultimately, carbon assimilation, rather than relying on empirical correlations.
 
 At the canopy level, MLR integrates leaf-scale physiological processes with an explicit treatment of canopy radiative transfer, enabling physically consistent scaling from leaves to the canopy. This integration preserves mechanistic interpretability while accounting for vertical gradients in light availability, photosynthetic capacity, and fluorescence emission. As a result, the canopy-level MLR provides a coherent framework for linking remotely sensed SIF to canopy-scale GPP.
 
@@ -76,34 +76,44 @@ The MLR framework has demonstrated strong scalability and transferability across
 
 ## III. MLR Functionalities and Scales
 
-MLR describes the mechanistic relationship among three sets of unknowns: SIF, Ja or ΦP, and NPQ (or qL). Therefore, three equations are required to close this system. MLR itself establishes the theoretical relationship among Ja, SIF, and NPQ (or qL). It needs two additional independent equations for closure. One equation links Ja (or ΦP) between light and carbon reactions, thus, Ja can be determined independently from the FvCB model. The remaining equation must independently model either (not both) NPQ or qL. Computing SIF via qL can be achieved by modeling qL as a function of environmental variables such as incident PAR without sacrificing modeling accuracy, as demonstrated at both leaf and canopy scales.
+The MLR framework characterizes the intrinsic relationships among three coupled processes: SIF, J<sub>a</sub> or Φ<sub>P</sub>, and NPQ or, equivalently q<sub>L</sub>. Closing this system requires three independent equations. MLR explicitly establishes the theoretical relationship among SIF, J<sub>a</sub>, and NPQ (or q<sub>L</sub>) based on the physics and biochemistry of the photosynthetic light reactions. Two additional equations are required for closure. The first links J<sub>a</sub> (or Φ<sub>P</sub>) between the light and carbon reactions, allowing J<sub>a</sub> to be determined independently through the FvCB biochemical model. The second equation independently parameterizes either NPQ or q<sub>L</sub> (but not both).
+
+In practice, computing SIF through q<sub>L</sub> has been shown to be both accurate and robust. Modeling q<sub>L</sub> as a direct function of incident PAR, which captures the dominant first-order controls on photochemical regulation without sacrificing performance. This formulation has been validated at both leaf and canopy scales and forms the basis of the q<sub>L</sub>-based MLR implementation.
 
 ### III.1 Leaf-level MLR model
 
 ![Fig1](Figs/SCOPE_SIF1.png)
 
-The procedure of modeling SIF emission (F<sub>e</sub>), using two alternative strategies implemented in SCOPE: the qL-based and NPQ-based approaches. Both strategies utilize the FvCB biochemical model to compute Ja, which is then combined with independent NPQ- or qL-based formulations to derive Fe. The default SCOPE implementation computes Fe via the NPQ-based route, where the rate constant of NPQ (k<sub>N</sub>) is formulated as a function of the degree of light saturation (x). We explored the alternative qL-based route, in which qL is formulated as a function of incident PAR, capturing the first-order effects of light intensities on qL variation. Similar to the NPQ-based approach, this method relies on the FvCB to estimate Ja at the leaf level. We then compared simulated Fe from the qL-based and NPQ-based approaches. Specificly, qL can be effectively estimated using a parsimonious equation as a function of incident PAR: 
+Two alternative strategies for modeling leaf-level SIF emission (F<sub>e</sub>) implemented within the SCOPE framework: 
+
+- the traditional NPQ-based approach
+- the alternative q<sub>L</sub>-based approach
+
+In both strategies, the FvCB biochemical model is used to compute the J<sub>a</sub>, which is then combined with an independent formulation of NPQ or q<sub>L</sub> to derive F<sub>e</sub>.
+
+In the default SCOPE implementation, F<sub>e</sub> is calculated via the NPQ-based route, in which the rate constant of non-photochemical quenching (k<sub>N</sub>) is parameterized as a function of the degree of light saturation (x). While widely adopted, this formulation relies on an empirical representation of NPQ that can limit scalability across species and environmental conditions. As an alternative, we implemented a q<sub>L</sub>-based strategy, in which q<sub>L</sub> is parameterized directly as a function of incident PAR. This approach captures the first-order effects of light intensity on photochemical regulation while remaining parsimonious and mechanistically interpretable. Similar to the NPQ-based formulation, the q<sub>L</sub>-based approach relies on the FvCB model to estimate J<sub>a</sub> at the leaf level. Simulated F<sub>e</sub> from the two approaches were subsequently compared.
+
+Specifically, q<sub>L</sub> is estimated using a simple exponential formulation:
 
 $$
 q_L = a_{q_L} * e^{-b_{q_L}*PAR}
 $$
 
-where aqL and bqL are empirical parameters, which were determined by fitting leaf-level PAM measurements across diverse PFTs under varying environmental conditions. These parameters are relatively conservative across PFTs, lending support for greater scalability and broader applicability of the qL-based SIF formulation.
-Then, PSII Fe (F<sub>e, PSII</sub>) based on the qL strategy can be computed directly below:
+where a<sub>qL</sub> and b<sub>qL</sub> are empirical parameters, determined by fitting PAM chlorophyll fluorescence measurements across a wide range of PFTs and environmental conditions. These parameters exhibit relatively limited variability across PFTs, supporting the scalability and general applicability of the q<sub>L</sub>-based SIF formulation. Using the q<sub>L</sub>-based strategy, PSII F<sub>e</sub> (F<sub>e,PSII</sub>) is computed as:
 
 $$
 F_{e, PSII} = \frac{J_a*\Phi_{PSIIm}}{\Phi_{PSIIm}(1+k_{DF})q_L}
 $$
 
-Here k_DF_ is the ratio of k_D_ and k_F_. Finally, fluorescence yield (ΦF) of PSII (Φ<sub>F, PSII</sub>) based on the qL strategy can be obtained from:
+where k<sub>DF</sub> ​denotes the ratio of the constitutive heat dissipation rate constant (k<sub>D</sub>) to the fluorescence rate constant (k<sub>F</sub>), and Φ<sub>PSIIm</sub> represents the maximum photochemical quantum yield for a darkadapted leaf. The corresponding PSII fluorescence yield (Φ<sub>F,PSII</sub>) is then obtained as:
 
 $$
 \Phi_{F, PSII} = \frac{F_e}{0.5*APAR}
 $$
 
-where the factor 0.5 reflects the fraction of the absorbed PAR (APAR) allocated to PSII.
+where APAR denotes absorbed photosynthetically active radiation, and the factor 0.5 accounts for the assumption that half of APAR is allocated to PSII.
 
-SCOPE stratifies the canopy into sunlit and shaded leaves. Therefore, all dynamic variables relevant to NPQ- and qL-based formulations above are calculated separately for sunlit and shaded leaves.
+In SCOPE, the canopy is stratified into sunlit and shaded leaf fractions. Accordingly, all state variables and fluxes relevant to the NPQ- and q<sub>L</sub>-based formulations—including PAR, J<sub>a</sub>, q<sub>L</sub>, and F<sub>e</sub>—are computed separately for sunlit and shaded leaves prior to canopy integration.
 
 ### III.2 Canopy-level MLR model
 
@@ -111,13 +121,14 @@ To be done...
 
 ## Annex 1: Abbreviations
 
-ΦF: fluorescence yield  
+Φ<sub>F</sub>: fluorescence yield  
 Φ<sub>F, PSII</sub>: PSII ΦF  
-ΦP: photochemical quantum yield  
+Φ<sub>P</sub>: photochemical quantum yield  
+Φ<sub>PSIIm</sub>: the maximum photochemical quantum yield for a darkadapted leaf
 Cab: chlorophyll content a and b  
 F<sub>e</sub>: SIF emission  
 F<sub>e, PSII</sub>: PSII Fe  
-Ja: actual electron transport rate  
+J<sub>a</sub>: actual electron transport rate  
 Jmax: maximum electron transport rate 
 k<sub>D</sub>: The rate constant of internal conversion (unregulated heat dissipation)  
 k<sub>F</sub>: The rate constant of SIF emission  
@@ -136,7 +147,7 @@ PAM: pulse-amplitude-modulated
 PAR: photosynthetically active radiation  
 PFT: plant functional types  
 PSII: photosystem II  
-qL: the fraction of open PSII reaction centers  
+q<sub>L</sub>: the fraction of open PSII reaction centers  
 RUE: Radiation Use Efficiency  
 SIF: solar-induced chlorophyll fluorescence  
 SCOPE: Soil Canopy Observation of Photosynthesis and Energy fluxes  
