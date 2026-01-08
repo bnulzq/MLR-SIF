@@ -80,7 +80,7 @@ MLR describes the mechanistic relationship among three sets of unknowns: SIF, Ja
 
 ### III.1 Leaf-level MLR model
 
-[Fig1](../Figs/SCOPE_SIF.png)
+![Fig1](../Figs/SCOPE_SIF.png)
 
 Figure 1 outlines the procedure of modeling Fe, using two alternative strategies implemented in 
 221 SCOPE: the qL-based and NPQ-based approaches. Both strategies utilize the FvCB biochemical 
