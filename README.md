@@ -76,7 +76,12 @@ The MLR framework has demonstrated strong scalability and transferability across
 
 ## III. MLR Functionalities and Scales
 
+MLR describes the mechanistic relationship among three sets of unknowns: SIF, Ja or ΦP, and NPQ (or qL). Therefore, three equations are required to close this system. MLR itself establishes the theoretical relationship among Ja, SIF, and NPQ (or qL). It needs two additional independent equations for closure. One equation links Ja (or ΦP) between light and carbon reactions, thus, Ja can be determined independently from the FvCB model. The remaining equation must independently model either (not both) NPQ or qL. Computing SIF via qL can be achieved by modeling qL as a function of environmental variables such as incident PAR without sacrificing modeling accuracy, as demonstrated at both leaf and canopy scales.
+
 ### III.1 Leaf-level MLR model
+
+
+
 
 ### III.2 Canopy-level MLR model
 
