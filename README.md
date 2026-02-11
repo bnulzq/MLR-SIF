@@ -102,7 +102,7 @@ $$
 where a<sub>qL</sub> and b<sub>qL</sub> are empirical parameters, determined by fitting PAM chlorophyll fluorescence measurements across a wide range of PFTs and environmental conditions. These parameters exhibit relatively limited variability across PFTs, supporting the scalability and general applicability of the q<sub>L</sub>-based SIF formulation. Using the q<sub>L</sub>-based strategy, PSII F<sub>e</sub> (F<sub>e,PSII</sub>) is computed as:
 
 $$
-F_{e, PSII} = \frac{J_a*\Phi_{PSIIm}}{\Phi_{PSIIm}(1+k_{DF})q_L}
+F_{e, PSII} = \frac{J_a*\(1-Phi_{PSIIm})}{\Phi_{PSIIm}(1+k_{DF})q_L}
 $$
 
 where k<sub>DF</sub> ​denotes the ratio of the constitutive heat dissipation rate constant (k<sub>D</sub>) to the fluorescence rate constant (k<sub>F</sub>), and Φ<sub>PSIIm</sub> represents the maximum photochemical quantum yield for a dark-adapted leaf. The corresponding PSII fluorescence yield (Φ<sub>F,PSII</sub>) is then obtained as:
