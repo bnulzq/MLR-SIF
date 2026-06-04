@@ -82,7 +82,7 @@ In practice, computing SIF through q<sub>L</sub> has been shown to be both accur
 
 ### III.1 Leaf-level MLR model
 
-![Fig1](Figs/SCOPE_SIF1.png)
+![Fig1](Figs/SCOPE_SIF.png)
 
 Two alternative strategies for modeling leaf-level SIF emission (F<sub>e</sub>) implemented within the SCOPE framework: 
 
