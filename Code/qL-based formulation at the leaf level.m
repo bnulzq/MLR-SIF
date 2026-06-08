@@ -194,3 +194,62 @@ function [eta,qE,qQ,fs,fo,fm,fo0,fm0,Kn] = Fluorescencemodel(ps,x, Kp,Kf,Kd,Knpa
 
 end
 
+%% Compute Assimilation.
+%  Note: even though computeA() is written as a separate function,
+%    the code is, in fact, executed exactly this point in the file (i.e. between the previous if clause and the next section
+function [A, biochem_out] = computeA(Ci, Type, g_m, Vs_C3, MM_consts, Rd, Vcmax, Gamma_star, Je, effcon, atheta, kpepcase)
+% global: Type, Vcmax, Gamma_star, MM_consts, Vs_C3, effcon, Je, atheta, Rd    %Kc, O, Ko, Vcmax25, qt
+persistent fcount
+if nargin == 0
+    fcount = 0;
+    return
+end
+if strcmpi('C3', Type)
+    %[Ci, gs] = BallBerry(Cs, RH, A_bar, BallBerrySlope, BallBerry0, 0.3, Ci_input);
+    %effcon      = 0.2;
+    % without g_m:
+    Vs          = Vs_C3; % = (Vcmax25/2) .* exp(log(1.8).*qt);    % doesn't change on iteration.
+    if any(g_m < Inf)
+        % with g_m:
+        Vc = sel_root( 1./g_m, -(MM_consts + Ci +(Rd + Vcmax)./g_m), Vcmax.*(Ci - Gamma_star + Rd./g_m), -1);
+        Ve = sel_root( 1./g_m, -(Ci + 2*Gamma_star +(Rd + Je .* effcon)./g_m), Je .* effcon.*(Ci - Gamma_star + Rd./g_m), -1);
+        CO2_per_electron = Ve ./ Je;
+    else
+        Vc          = Vcmax.*(Ci-Gamma_star)./(MM_consts + Ci);  % MM_consts = (Kc .* (1+O./Ko)) % doesn't change on iteration.
+        CO2_per_electron = (Ci-Gamma_star)./(Ci+2*Gamma_star) .* effcon;
+        Ve          = Je .* CO2_per_electron;
+    end
+else  %C4
+    %[Ci, gs] = BallBerry(Cs, RH, A_bar, BallBerrySlope, BallBerry0, 0.1, Ci_input);
+    Vc          = Vcmax;
+    Vs          = kpepcase.*Ci;
+    %effcon      = 0.17;                    % Berry and Farquhar (1978): 1/0.167 = 6
+    CO2_per_electron = effcon; % note: (Ci-Gamma_star)./(Ci+2*Gamma_star) = 1 for C4 (since O = 0); this line avoids 0/0 when Ci = 0
+    Ve          = Je .* CO2_per_electron;
+end
+
+% find the smoothed minimum of Ve, Vc = V, then V, Vs
+%         [a1,a2]     = abc(atheta,-(Vc+Ve),Vc.*Ve);
+%         % select the min or max  depending on the side of the CO2 compensation point
+%         %  note that Vc, Ve < 0 when Ci < Gamma_star (as long as Q > 0; Q = 0 is also ok),
+%         %     so the original construction selects the value closest to zero.
+%         V           = min(a1,a2).*(Ci>Gamma_star) + max(a1,a2).*(Ci<=Gamma_star);
+%         [a1,a2]     = abc(0.98,-(V+Vs),V.*Vs);
+%         Ag          = min(a1,a2);
+V           = sel_root(atheta,-(Vc+Ve),Vc.*Ve, sign(-Vc) ); % i.e. sign(Gamma_star - Ci)
+Ag          = sel_root(0.98,-(V+Vs),V.*Vs, -1);
+A           = Ag - Rd;
+fcount = fcount + 1; % # of times we called computeA
+
+if nargout > 1
+    biochem_out.A = A;
+    biochem_out.Ag = Ag;
+    biochem_out.Vc = Vc;
+    biochem_out.Vs = Vs;
+    biochem_out.Ve = Ve;
+    biochem_out.CO2_per_electron = CO2_per_electron;
+    biochem_out.fcount = fcount;
+end
+
+end
+
